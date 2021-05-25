@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RailsBlog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+
+  <header>
+      <%= link_to 'Home', root_path%>
+      <% if user_signed_in? %>
+       <%= current_user.username %>
+      <% if current_user.admin? %>
+        (admin)
+      <% end %> |
+       <%= link_to 'Log out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure' }%>
+
+      <% else %>
+        <%= link_to 'Log in', new_user_session_path%>
+      <% end %>
+    </nav>
+  </header>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
+  </body>
+</html>
